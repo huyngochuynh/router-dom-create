@@ -1,39 +1,24 @@
-import './App.css';
-import SearchAppBar from './components/SearchAppBar';
-import HomePage from './pages/HomePage';
-import { Routes, Route } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { green, purple } from '@mui/material/colors';
-import { AuthProvider } from "./context/AuthContext";
+import "./App.css";
+import Navbar from './components/Navbar/Navbar';
+import Search from "./components/Pages/Search";
+import Home from "./components/Pages/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MovieDetails from "./components/Pages/MovieDetails"
 
+function App () {
 
-const theme = createTheme({
-  shape: { borderRadius: 30 },
-  palette: {
-    primary: {
-      main: purple[500],
-    },
-    secondary: {
-      main: green[500],
-    },
-  }
-})
-
-function App() {
   return (
-    <div>
-      <ThemeProvider theme={theme}>
-        <AuthProvider>
-          <SearchAppBar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/sign-in" element={ <HomePage /> } />
-            <Route path="/book/:id" element={ <HomePage /> } />
-          </Routes>
-        </AuthProvider>
-      </ThemeProvider>
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route exact path = '/' element={<Home />} />
+          <Route path='/search' element={<Search />} />
+          <Route path="/movies/:id" element={<MovieDetails />} />
+        </Routes>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
 
 export default App;
